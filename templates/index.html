@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movie recommedations</title>
+    <style>
+        body {
+            background-color: #0e1117;
+            color: white;
+            font-family: sans-serif;
+        }
+        h1 a{
+            color:crimson;
+            text-decoration: none;
+        }
+        h1{
+            text-align: center;
+        }
+        #movie {
+            width: 60vw;
+            max-width: 50rem;
+            background-color: #262730;
+            border: 0.07rem solid whitesmoke;
+            border-radius: 0.2rem;
+            color: white;
+            padding: 0.4rem;
+            min-width: 20rem;
+            margin: 0.3rem;
+        }
+        .button {
+            margin: 0.3rem;
+            background-color:#262730;
+            border: 0.07rem solid whitesmoke;
+            border-radius: 0.2rem;
+            color: white;
+            font-size: 1.01rem;
+        }
+        .button:hover {
+            border-color: #c23c3e;
+            color: #c23c3e;
+        }
+        .search {
+            display: flex;
+            justify-content: center;
+            flex-flow: row wrap;
+        }
+        input {
+            font-size: 1.1rem;
+        }
+        li {
+            font-weight: bold;
+            font-size: 1.2rem;
+
+        }
+        .not_found {
+            text-align: center;
+        }
+        @media (max-width : 480px) {
+            .cards {
+                flex-direction: column;
+            }
+            .search {
+                justify-content: left;
+            }
+            #movie {
+                width: 90vw;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="body">
+        <div>
+            <div class="header">
+                <h1><a href={{ url_for('home') }}>Movie Recommendations</a></h1>
+            </div>
+            <form class="search" action="/recommend", method="POST">
+                <input type="text" name="movie" id="movie" placeholder="Enter the full movie name">
+                <input type="submit" value="submit" class="button">
+            </form>
+        </div>
+        {% if check == 0 %}
+            <div class="cards">
+                <ul>
+                {% for i in range(5) %}
+                    <li>{{ mvs[0][i].capitalize() }} ({{ mvs[2][i] }})</li>
+                    <p>{{ mvs[1][i] }}</p>
+                {% endfor %}
+                </ul>
+            </div>
+            {% else %}
+            <p class="not_found">{{ msg }}</p>        
+        {% endif %}
+    </div>
+
+</body>
+</html>
